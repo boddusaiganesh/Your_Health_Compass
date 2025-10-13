@@ -1,0 +1,392 @@
+/* src/App.css */
+
+/* --- App Layout --- */
+.main-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.canvas-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  background: linear-gradient(to bottom right, #111827, #1e3a8a, #1f2937);
+}
+
+/* --- Header --- */
+.app-header { padding: 1rem 1rem 0; }
+@media (min-width: 768px) { .app-header { padding: 2rem 2rem 0; } }
+.header-content { max-width: 56rem; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.header-title { font-size: 1.25rem; font-weight: 700; color: white; }
+
+/* --- Chat Area --- */
+.chat-area {
+  flex: 1 1 0%; /* This is the key: allows this element to grow and shrink */
+  overflow-y: auto; /* IMPORTANT: Creates the independent vertical scrollbar */
+  padding: 1rem;
+  /* Ensure a smooth scrolling experience on touch devices */
+  -webkit-overflow-scrolling: touch;
+}
+.chat-content {
+  max-width: 56rem;
+  margin: 0 auto;
+  width: 100%;
+  /* This allows the container to be at least the full height, but grow taller if needed */
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* This is the key: it anchors the content to the bottom of the container */
+  justify-content: flex-end;
+}
+
+.message-list { display: flex; flex-direction: column; justify-content: flex-end; flex-grow: 1; }
+
+/* --- Welcome Screen --- */
+.welcome-screen { text-align: center; }
+.welcome-icon-container { display: inline-block; padding: 1rem; background-color: var(--white-10); border-radius: 9999px; margin-bottom: 1rem; }
+.welcome-title { font-size: 2.25rem; font-weight: 700; color: white; margin-bottom: 0.5rem; }
+.welcome-subtitle { color: var(--text-gray-300); font-size: 1.125rem; margin-bottom: 2rem; }
+.welcome-prompts { max-width: 42rem; margin: 0 auto; }
+.example-prompts-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+@media (min-width: 768px) { .example-prompts-grid { grid-template-columns: repeat(2, 1fr); } }
+.prompt-button { background-color: var(--white-10); padding: 1rem; border-radius: 0.5rem; text-align: left; transition: background-color 300ms; border: none; color: white; cursor: pointer; width: 100%; }
+.prompt-button:hover { background-color: var(--white-20); }
+.prompt-title { font-weight: 600; color: white; }
+.prompt-subtitle { color: var(--text-gray-300); font-size: 0.875rem; }
+
+/* --- Chat Messages --- */
+.message-container { display: flex; align-items: flex-start; gap: 1rem; margin: 1rem 0; }
+.message-container.user { justify-content: flex-end; }
+.avatar { flex-shrink: 0; width: 2.5rem; height: 2.5rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; }
+.bot-avatar { background-color: var(--blue-500); }
+.user-avatar { background-color: #4B5563; }
+.message-bubble { max-width: 80%; padding: 1rem; border-radius: 1.25rem; color: white; word-wrap: break-word; }
+.bot-bubble { background-color: var(--white-10); border-bottom-left-radius: 0; }
+.user-bubble { background-color: var(--blue-600); border-bottom-right-radius: 0; }
+.message-text { white-space: pre-wrap; word-wrap: break-word; }
+
+/* --- Sources --- */
+.sources-container { margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--white-20); }
+.sources-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.source-chip { font-size: 0.75rem; background-color: var(--white-20); padding: 0.25rem 0.75rem; border-radius: 9999px; transition: background-color 300ms; border: none; color: white; cursor: pointer; }
+.source-chip:hover { background-color: var(--white-30); }
+
+
+/* --- Input Area --- */
+.input-area { padding: 1rem 1rem 2rem; }
+@media (min-width: 768px) { .input-area { padding: 0 2rem 2rem; } }
+.input-content { max-width: 56rem; margin: 0 auto; }
+.input-form { position: relative; }
+.text-input { width: 100%; padding: 1rem 3.5rem 1rem 1.5rem; background-color: rgba(31, 41, 55, 0.8); backdrop-filter: blur(4px); border: 1px solid var(--white-20); border-radius: 0.75rem; color: white; transition: all 300ms; box-sizing: border-box; }
+.text-input::placeholder { color: var(--text-gray-400); }
+.text-input:focus { outline: none; box-shadow: 0 0 0 2px var(--blue-500); }
+.send-button { position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); padding: 0.5rem; background-color: var(--blue-600); border-radius: 9999px; transition: background-color 300ms; border: none; color: white; cursor: pointer; }
+.send-button:hover { background-color: var(--blue-500); }
+.send-button:disabled { background-color: #6B7280; cursor: not-allowed; }
+.disclaimer { font-size: 0.75rem; text-align: center; color: var(--text-gray-400); margin-top: 0.5rem; }
+
+/* --- REFINED Source Modal --- */
+.modal-overlay { 
+  position: fixed; 
+  inset: 0; 
+  background-color: rgba(0, 0, 0, 0.7); 
+  backdrop-filter: blur(8px); 
+  z-index: 50; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  padding: 1rem; 
+}
+.modal-content { 
+  background-color: #262a33; 
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtler border */
+  border-radius: 16px; 
+  padding: 0; 
+  max-width: 64rem; 
+  width: 100%; 
+  position: relative; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+}
+.modal-title { font-size: 1.25rem; font-weight: 600; color: white; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+
+
+
+/* --- NEW "Bot is Thinking" / Loading Styles --- */
+.thinking-bubble {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.streaming-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.2em;
+  background-color: white;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 
+  50% { opacity: 0; } 
+}
+
+.loading-dots { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 0; }
+.dot { height: 0.5rem; width: 0.5rem; background-color: white; border-radius: 9999px; animation: pulse 1.4s infinite ease-in-out both; }
+.dot-1 { animation-delay: -0.3s; }
+.dot-2 { animation-delay: -0.15s; }
+@keyframes pulse {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1.0); }
+}
+
+/* src/App.css */
+
+/* --- NEW: Three-Dot "Thinking" Animation --- */
+.thinking-bubble {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0; /* Add padding for vertical spacing */
+}
+
+.thinking-dot {
+  height: 8px;
+  width: 8px;
+  background-color: white;
+  border-radius: 50%;
+  animation: pulse 1.4s infinite ease-in-out both;
+}
+
+.thinking-dot.dot-1 { animation-delay: -0.3s; }
+.thinking-dot.dot-2 { animation-delay: -0.15s; }
+.thinking-dot.dot-3 { animation-delay: 0s; }
+
+/* The 'pulse' keyframe animation can be reused if it's already there */
+@keyframes pulse {
+  0%, 80%, 100% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.0);
+    opacity: 1;
+  }
+}
+
+/* In src/App.css */
+/* --- REPLACE ALL EXISTING MODAL STYLES WITH THESE --- */
+
+/* --- Refined Source Modal --- */
+.modal-overlay { 
+  position: fixed; 
+  inset: 0; 
+  background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+  backdrop-filter: blur(8px); 
+  z-index: 50; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  padding: 1rem; 
+}
+
+.modal-content { 
+  background-color: #262a33; /* The dark background from the image */
+  border: 1px solid rgba(255, 255, 255, 0.15); 
+  border-radius: 16px; 
+  padding: 0; /* Remove padding to use flexbox structure */
+  max-width: 56rem; 
+  width: 100%; 
+  position: relative; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  padding: 1.25rem 1.5rem; /* More vertical padding */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  flex-shrink: 0;
+}
+
+
+
+.modal-body {
+  position: relative;
+  overflow: hidden; 
+  flex-grow: 1;
+}
+
+.modal-overlay { 
+  position: fixed; 
+  inset: 0; 
+  background-color: rgba(0, 0, 0, 0.7); 
+  backdrop-filter: blur(8px); 
+  z-index: 50; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  padding: 1rem; 
+}
+
+.modal-content { 
+  background-color: #262a33; 
+  border: 1px solid rgba(255, 255, 255, 0.15); 
+  border-radius: 16px; 
+  padding: 0; 
+  max-width: 64rem; /* Slightly wider for better text flow */
+  width: 100%; 
+  position: relative; 
+  box-shadow: 0 10px D30px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  position: relative;
+  flex-shrink: 0; /* Prevents header from shrinking */
+}
+
+.modal-title { 
+  font-size: 1.125rem; 
+  font-weight: 500; 
+  color: var(--text-gray-300);
+  margin: 0; 
+  display: flex; 
+  align-items: center; 
+  gap: 0.75rem; 
+}
+
+.modal-close-button { 
+  position: absolute; 
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
+  color: var(--text-gray-400); 
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  transition: color 0.2s; 
+}
+.modal-close-button:hover { color: white; }
+
+
+.source-text { 
+  color: var(--text-gray-300); 
+  white-space: pre-wrap; 
+  overflow-y: auto; 
+  height: 100%;
+  /* Increased padding for the "reader mode" feel */
+  padding: 2rem 6.5rem; 
+  font-size: 1rem; /* Slightly larger body font for readability */
+  line-height: 1.8; 
+}
+.source-filename { 
+  font-weight: 600; /* Bolder */
+  font-size: 1.5rem; /* Larger */
+  color: white; 
+  margin-bottom: 1.5rem; 
+  padding-bottom: 1.5rem; 
+  /* The subtle separator line */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+  word-break: break-word; 
+}
+
+.modal-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-gray-300);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  
+  /* --- The Magic: Hidden by default --- */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.modal-nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal-nav-button.prev {
+  left: 1.5rem;
+}
+
+.modal-nav-button.next {
+  right: 1.5rem;
+}
+
+
+.source-link {
+  color: #60A5FA;
+  text-decoration: none;
+  font-weight: 500;
+}
+.source-link:hover {
+  text-decoration: underline;
+}
+
+/* Style for the web source chips */
+.web-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px; /* Prevent long titles from breaking the layout */
+} 
+
+
+
+.message-text a {
+  color: #60A5FA; 
+  font-weight: 500;
+  text-decoration: none; 
+  background-color: rgba(96, 165, 250, 0.1); /* Subtle background glow */
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin: 0 2px;
+  transition: all 0.2s ease-in-out;
+}
+
+.message-text a:hover {
+  background-color: rgba(96, 165, 250, 0.2);
+  text-decoration: underline; /* Add underline on hover for clarity */
+}
+
+.modal-body:hover .modal-nav-button {
+  opacity: 1;
+  visibility: visible;
+}
