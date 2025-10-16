@@ -1,10 +1,6 @@
 Your Health Compass is an advanced AI health assistant that delivers trustworthy, real-time answers to health-related questions.
 It seamlessly combines a curated knowledge base of 200+ fact sheets with the intelligence of live web search—ensuring reliability, accuracy, and freshness.
 
-🎥 Live Demo
-https://drive.google.com/file/d/1zs8Rs9hjZZlFqazKyCqrAy7TQNYbcNSY/view?usp=sharing
-
-Click the thumbnail above to watch the full demonstration, showcasing real-time reasoning and agentic web search capabilities.
 
 ✨ Key Features
 
